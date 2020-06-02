@@ -1,24 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import "./App.css";
+import StatInput from "./components/inputs/StatInput";
+
+const theme = createMuiTheme({
+  overrides: {
+    MuiInputLabel: {
+      root: {
+        color: "#fff",
+      },
+    },
+    MuiOutlinedInput: {
+      notchedOutline: {
+        borderColor: "#fff",
+      },
+    },
+    MuiInputBase: {
+      input: {
+        borderColor: "#fff",
+      },
+    },
+  },
+  palette: {
+    primary: {
+      main: "#fff",
+      light: "#fff",
+      dark: "#fff",
+    },
+    secondary: {
+      main: "#fff",
+      light: "#fff",
+      dark: "#fff",
+    },
+  },
+});
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <MuiThemeProvider theme={theme}>
+        <StatInput />
+      </MuiThemeProvider>
     </div>
   );
 }
