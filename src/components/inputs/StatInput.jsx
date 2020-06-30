@@ -1,24 +1,21 @@
 import React from "react";
-import { TextField } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
-import "./stat-input.css";
+import PropTypes from 'prop-types';
+import "./stat-input.scss";
 
-const StatInput = () => {
+const StatInput = (props) => {
+  const { type, label, max } = props;
   return (
-    <div>
-      <TextField
-        id="sp-from-gear"
-        color="secondary"
-        label="Spellpower from gear"
-      />
-      <TextField
-        id="sp-from-consum"
-        variant="outlined"
-        color="primary"
-        label="Spellpower from Consumables"
-      />
+    <div className="wrapper">
+      <label className="label">{label}</label>
+      <input min="0" max={max} type={type} className="input"/>
     </div>
   );
 };
+
+StatInput.propTypes = {
+  type: PropTypes.oneOf(['number', 'text']),
+  label: PropTypes.string,
+  max: PropTypes.number
+}
 
 export default StatInput;

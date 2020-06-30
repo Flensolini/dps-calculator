@@ -1,0 +1,13 @@
+.field {
+    background-color: #3d3b3c;
+    border: none;
+    font-size: 20px;
+    border-radius: 3px;
+    padding: 20px 40px;
+    margin-bottom: 20px;
+    width: 160px;
+
+    &:focus{
+        outline: 1px solid #5f5b6b;
+    } 
+}

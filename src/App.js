@@ -1,46 +1,17 @@
 import React from "react";
-import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
-import "./App.css";
-import StatInput from "./components/inputs/StatInput";
+import "./App.scss";
+import StatsForm from "./components/form/StatsForm";
+import StatsWeight from "./components/weight/StatsWeight";
 
-const theme = createMuiTheme({
-  overrides: {
-    MuiInputLabel: {
-      root: {
-        color: "#fff",
-      },
-    },
-    MuiOutlinedInput: {
-      notchedOutline: {
-        borderColor: "#fff",
-      },
-    },
-    MuiInputBase: {
-      input: {
-        borderColor: "#fff",
-      },
-    },
-  },
-  palette: {
-    primary: {
-      main: "#fff",
-      light: "#fff",
-      dark: "#fff",
-    },
-    secondary: {
-      main: "#fff",
-      light: "#fff",
-      dark: "#fff",
-    },
-  },
-});
 
 function App() {
   return (
     <div className="App">
-      <MuiThemeProvider theme={theme}>
-        <StatInput />
-      </MuiThemeProvider>
+      <h1>Lightwieght Mage Tool</h1>
+      <div className="container">
+        <StatsForm/>
+        <StatsWeight/>
+      </div>
     </div>
   );
 }
