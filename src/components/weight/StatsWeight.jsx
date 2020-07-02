@@ -5,14 +5,17 @@ import TextField from "../field/TextField";
 
 const StatsWeight = (props) => {
 
-  const { SP, crit, hit, int } = props;
+  const { SP, crit, hit, int } = props.values;
+  const { ony, zandalar, songflower, dmt, dmf, gae, efp, flaskSP, wc, ai, BOK, motw} = props.buffs;
 
   const coefficient = 0.814;
   const baseDamage = 457;
 
+  const totalInt = (parseInt(int) + (ai ? 31 : 0) + (motw ? 12 : 0)) * (zandalar ? 1.15 : 1) * (BOK ? 1.1 : 1)
+  const totalSpellDamage = parseInt(SP) + (gae ? 35 : 0) + (efp ? 15 : 0) + (flaskSP ? 150 : 0);
   const totalHit = 17-parseInt(hit)
-  const totalCrit = parseInt(crit) + parseInt(int)/59.5;
-  const totalDamage = baseDamage + (coefficient * parseInt(SP));
+  const totalCrit = parseInt(crit) + totalInt/59.5 + (ony ? 10 : 0) + (songflower ? 5 : 0) + (dmt ? 3 : 0) + (wc ? 10: 0);
+  const totalDamage = (baseDamage + (coefficient * totalSpellDamage)) * (dmf ? 1.1 : 1);
 
   const actualHit = (100-(totalHit))/100;
   const actualCrit = totalCrit/100;
@@ -77,7 +80,6 @@ const StatsWeight = (props) => {
   const hitDiff = hitSim() - baseSim()
   const spellDiff = spellSim() - baseSim()
 
-  console.log(critDiff/spellDiff * 10)
 
   const critValue = roundNumber(critDiff/spellDiff * 10)
   const hitValue = roundNumber(hitDiff/spellDiff * 10)
@@ -93,10 +95,8 @@ const StatsWeight = (props) => {
 };
 
 StatsWeight.propTypes = {
-  SP: PropTypes.number,
-  crit: PropTypes.number,
-  hit: PropTypes.number,
-  int: PropTypes.number,
+  values: PropTypes.object,
+  buffs: PropTypes.object,
 }
 
 
