@@ -5,8 +5,10 @@ import TextField from "../field/TextField";
 
 const StatsWeight = (props) => {
 
-  const { SP, crit, hit, int } = props.values;
-  const { ony, zandalar, songflower, dmt, dmf, gae, efp, flaskSP, wc, ai, BOK, motw} = props.buffs;
+  const { handleOutputChange, values, buffs} = props;
+
+  const { SP, crit, hit, int } = values;
+  const { ony, zandalar, songflower, dmt, dmf, gae, efp, flaskSP, wc, ai, BOK, motw} = buffs;
 
   const coefficient = 0.814;
   const baseDamage = 457;
@@ -48,6 +50,7 @@ const StatsWeight = (props) => {
   const baseSim = () => {
     const critDamage = baseNumbers()[0]* totalDamage * 2;
     const nonCritDamage = baseNumbers()[1] * totalDamage;
+    handleOutputChange(nonCritDamage + critDamage)
     return critDamage + nonCritDamage;
     
   }
@@ -85,6 +88,8 @@ const StatsWeight = (props) => {
   const hitValue = roundNumber(hitDiff/spellDiff * 10)
   const intValue = roundNumber(critValue/59.5)
 
+
+  
   return (
     <div className="weight">
         <TextField label="1% Crit" value={critValue}></TextField>
@@ -95,6 +100,7 @@ const StatsWeight = (props) => {
 };
 
 StatsWeight.propTypes = {
+  handleOutputChange: PropTypes.func,
   values: PropTypes.object,
   buffs: PropTypes.object,
 }

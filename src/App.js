@@ -3,6 +3,7 @@ import "./App.scss";
 import StatsForm from "./components/form/StatsForm";
 import StatsWeight from "./components/weight/StatsWeight";
 import Buffs from "./components/buffs/Buffs";
+import DPS from "./components/dps/DPS";
 
 
 function App() {
@@ -29,6 +30,16 @@ function App() {
     motw: false,
   })
 
+  const outputRef = React.useRef(37931)
+  const [output, setOutput] = React.useState(37931)
+
+  const handleOutputChange = value => {
+    if(value !== outputRef.current){
+      setOutput(value)
+    }
+    outputRef.current = value;
+  }
+
   const handleValuesChange = e => {
     const {name , value} = e.target
     setValues( prevState => ({
@@ -46,12 +57,23 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App"> 
       <h1>Lightweight Mage Tool</h1>
       <div className="container">
-        <Buffs handleChange={handleBuffsChange} values={buffs}/>
-        <StatsForm handleChange={handleValuesChange} values={values}/>
-        <StatsWeight buffs={buffs} values={values}/>
+        <div className="left">
+          <Buffs handleChange={handleBuffsChange} values={buffs}/>
+        </div>
+
+        <div className="mid">
+          <div className="top">
+            <StatsForm handleChange={handleValuesChange} values={values}/>
+            <StatsWeight handleOutputChange={handleOutputChange} buffs={buffs} values={values}/>
+          </div>
+          <div className="bottom">
+            <DPS output={output}/>
+          </div>
+        </div>
+
       </div>
     </div>
   );
