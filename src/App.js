@@ -2,6 +2,7 @@ import React from "react";
 import "./App.scss";
 import StatsForm from "./components/form/StatsForm";
 import StatsWeight from "./components/weight/StatsWeight";
+import FireStatsWeight from "./components/weight/FireStatsWeight"
 import Buffs from "./components/buffs/Buffs";
 import DPS from "./components/dps/DPS";
 
@@ -67,6 +68,7 @@ function App() {
         <div className="mid">
           <div className="top">
             <StatsForm handleChange={handleValuesChange} values={values}/>
+            <FireStatsWeight handleOutputChange={handleOutputChange} buffs={buffs} values={values}/>
             <StatsWeight handleOutputChange={handleOutputChange} buffs={buffs} values={values}/>
           </div>
           <div className="bottom">

@@ -15,17 +15,19 @@ const StatsWeight = (props) => {
 
   const totalInt = (parseInt(int) + (ai ? 31 : 0) + (motw ? 12 : 0)) * (zandalar ? 1.15 : 1) * (BOK ? 1.1 : 1)
   const totalSpellDamage = parseInt(SP) + (gae ? 35 : 0) + (efp ? 15 : 0) + (flaskSP ? 150 : 0);
-  const totalHit = 17-parseInt(hit)
+  const totalHit = 11-parseInt(hit)
   const totalCrit = parseInt(crit) + totalInt/59.5 + (ony ? 10 : 0) + (songflower ? 5 : 0) + (dmt ? 3 : 0) + (wc ? 10: 0);
   const totalDamage = (baseDamage + (coefficient * totalSpellDamage)) * (dmf ? 1.1 : 1);
 
   const actualHit = (100-(totalHit))/100;
   const actualCrit = totalCrit/100;
 
+
   const baseNumbers = () => {
     const numberOfCrits = 100 * actualCrit * actualHit;
     const numberOfNonCrits = 100 * (1-actualCrit) * actualHit;
     const numberOfHits = 100-(actualHit*100);
+
     return [ numberOfCrits, numberOfNonCrits, numberOfHits ]
   }
 
@@ -44,6 +46,7 @@ const StatsWeight = (props) => {
     const numberOfCrits = 100 * actualCrit * newHit;
     const numberOfNonCrits = 100 * (1-actualCrit) * newHit;
     const numberOfHits = 100-(newHit*100);
+
     return [ numberOfCrits, numberOfNonCrits, numberOfHits ]
   }
 
@@ -78,7 +81,6 @@ const StatsWeight = (props) => {
   const roundNumber = (num) => {
     return (Math.round(num * 100) / 100).toFixed(2);
   }
-
   const critDiff = critSim() - baseSim()
   const hitDiff = hitSim() - baseSim()
   const spellDiff = spellSim() - baseSim()
